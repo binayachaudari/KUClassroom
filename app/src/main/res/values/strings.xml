@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">KU CLASSROOM</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Check Updates</string>
+    <string name="about_us">About Us</string>
+    <string name="settings">Settings</string>
+    <string name="feedback">Feedback</string>
+    <string name="title_activity_activity2">activity2</string>
+
+    <string-array name="Departments">
+        <item>CS</item>
+        <item>CE</item>
+    </string-array>
+
+    <string-array name="Year">
+        <item>1st</item>
+        <item>2nd</item>
+        <item>3rd</item>
+        <item>4th</item>
+    </string-array>
+
+    <string-array name="Semesters">
+        <item>1st</item>
+        <item>2nd</item>
+    </string-array>
+
+</resources>

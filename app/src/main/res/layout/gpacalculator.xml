@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:focusableInTouchMode="true"
+    android:clickable="true">
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/deptView"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:gravity="center_vertical"
+            android:text="Department :"
+            android:layout_marginLeft="70dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="12dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/yearView"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_below="@+id/deptView"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@+id/spinner_dept"
+            android:layout_toStartOf="@+id/spinner_dept"
+            android:gravity=""
+            android:text="Year :"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/semView"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:gravity="center_vertical"
+            android:text="Semester :"
+            android:layout_marginTop="14dp"
+            android:layout_below="@+id/yearView"
+            android:layout_alignRight="@+id/yearView"
+            android:layout_alignEnd="@+id/yearView" />
+
+        <Spinner
+            android:id="@+id/spinner_dept"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:textAlignment="center"
+            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp"
+            android:layout_above="@+id/yearView"
+            android:layout_toRightOf="@+id/deptView"
+            android:layout_toEndOf="@+id/deptView" />
+
+        <Spinner
+            android:id="@+id/spinner_year"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_alignLeft="@+id/spinner_dept"
+            android:textAlignment="center"
+            android:layout_alignStart="@+id/spinner_dept"
+            android:layout_alignTop="@+id/yearView" />
+
+        <Spinner
+            android:id="@+id/spinner_sem"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_alignLeft="@+id/spinner_dept"
+            android:textAlignment="center"
+            android:layout_alignStart="@+id/spinner_dept"
+            android:layout_alignTop="@+id/semView" />
+        <RelativeLayout
+            android:layout_width="720dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_below="@+id/semView"
+            android:id="@+id/relativeLayout"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:id="@+id/Subject1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:id="@+id/Subject2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:layout_alignTop="@+id/Mark2"
+                android:layout_alignLeft="@+id/Subject1"
+                android:layout_alignStart="@+id/Subject1" />
+
+            <TextView
+                android:id="@+id/Subject3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:layout_alignTop="@+id/Mark3"
+                android:layout_alignLeft="@+id/Subject2"
+                android:layout_alignStart="@+id/Subject2" />
+
+            <TextView
+                android:id="@+id/Subject4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:layout_alignTop="@+id/Mark4"
+                android:layout_alignLeft="@+id/Subject3"
+                android:layout_alignStart="@+id/Subject3" />
+
+            <TextView
+                android:id="@+id/Subject5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:layout_alignTop="@+id/Mark5"
+                android:layout_alignLeft="@+id/Subject4"
+                android:layout_alignStart="@+id/Subject4" />
+
+            <TextView
+                android:id="@+id/Subject6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:layout_alignTop="@+id/Mark6"
+                android:layout_alignLeft="@+id/Subject5"
+                android:layout_alignStart="@+id/Subject5" />
+
+            <TextView
+                android:id="@+id/Subject7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:layout_alignTop="@+id/Mark7"
+                android:layout_alignLeft="@+id/Subject6"
+                android:layout_alignStart="@+id/Subject6" />
+
+            <TextView
+                android:id="@+id/Subject8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:layout_alignTop="@+id/Mark8"
+                android:layout_alignLeft="@+id/Subject7"
+                android:layout_alignStart="@+id/Subject7" />
+
+            <TextView
+                android:id="@+id/Subject9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:layout_alignTop="@+id/Mark9"
+                android:layout_alignLeft="@+id/Subject8"
+                android:layout_alignStart="@+id/Subject8" />
+
+            <TextView
+                android:id="@+id/Subject10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:layout_alignTop="@+id/Mark10"
+                android:layout_alignLeft="@+id/Subject9"
+                android:layout_alignStart="@+id/Subject9" />
+
+            <EditText
+                android:id="@+id/Mark1"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="Marks"
+                android:ems="10"
+                android:hint="Marks"
+                android:inputType="numberDecimal"
+                android:selectAllOnFocus="false"
+                android:singleLine="true"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_alignTop="@+id/Subject1"
+                android:layout_toRightOf="@+id/calculate"
+                android:layout_toEndOf="@+id/calculate" />
+
+            <EditText
+                android:id="@+id/Mark2"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="Marks"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:selectAllOnFocus="false"
+                android:singleLine="true"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/Mark1"
+                android:layout_alignLeft="@+id/Mark1"
+                android:layout_alignStart="@+id/Mark1"
+                android:layout_marginTop="7dp"
+                android:hint="Marks"
+                />
+
+            <EditText
+                android:id="@+id/Mark3"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="Marks"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:selectAllOnFocus="false"
+                android:singleLine="true"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/Mark2"
+                android:layout_alignLeft="@+id/Mark2"
+                android:layout_alignStart="@+id/Mark2"
+                android:layout_marginTop="7dp"
+                android:hint="Marks"/>
+
+            <EditText
+                android:id="@+id/Mark4"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="Marks"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:selectAllOnFocus="false"
+                android:singleLine="true"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/Mark3"
+                android:layout_alignLeft="@+id/Mark3"
+                android:layout_alignStart="@+id/Mark3"
+                android:layout_marginTop="7dp"
+                android:hint="Marks"/>
+
+            <EditText
+                android:id="@+id/Mark5"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/Mark4"
+                android:layout_alignStart="@+id/Mark4"
+                android:layout_below="@+id/Mark4"
+                android:contentDescription="Marks"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:selectAllOnFocus="false"
+                android:singleLine="true"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="7dp"
+                android:hint="Marks"/>
+
+            <EditText
+                android:id="@+id/Mark6"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="Marks"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:selectAllOnFocus="false"
+                android:singleLine="true"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/Mark5"
+                android:layout_alignLeft="@+id/Mark5"
+                android:layout_alignStart="@+id/Mark5"
+                android:layout_marginTop="7dp"
+                android:hint="Marks"/>
+
+            <EditText
+                android:id="@+id/Mark7"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="Marks"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:selectAllOnFocus="false"
+                android:singleLine="true"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/Mark6"
+                android:layout_alignLeft="@+id/Mark6"
+                android:layout_alignStart="@+id/Mark6"
+                android:layout_marginTop="7dp"
+                android:hint="Marks"/>
+
+            <EditText
+                android:id="@+id/Mark8"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="Marks"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:selectAllOnFocus="false"
+                android:singleLine="true"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/Mark7"
+                android:layout_alignLeft="@+id/Mark7"
+                android:layout_alignStart="@+id/Mark7"
+                android:layout_marginTop="7dp"
+                android:hint="Marks"/>
+
+            <EditText
+                android:id="@+id/Mark9"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="Marks"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:selectAllOnFocus="false"
+                android:singleLine="true"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/Mark8"
+                android:layout_alignLeft="@+id/Mark8"
+                android:layout_alignStart="@+id/Mark8"
+                android:layout_marginTop="7dp"
+                android:hint="Marks"
+                />
+
+            <EditText
+                android:id="@+id/Mark10"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="Marks"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:selectAllOnFocus="false"
+                android:singleLine="true"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/Mark9"
+                android:layout_alignLeft="@+id/Mark9"
+                android:layout_alignStart="@+id/Mark9"
+                android:layout_marginTop="7dp"
+                android:hint="Marks"
+                />
+
+            <Button
+                android:id="@+id/calculate"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Calculate"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:onClick="CalcGPA"
+                android:layout_below="@+id/Mark10"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/GPA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="center"
+                android:layout_below="@+id/calculate"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/GPAdesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_below="@+id/GPA"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="25dp"
+                android:textAlignment="center"
+                android:layout_marginStart="25dp"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:paddingBottom="25dp"/>
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_calendar"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Calendar" />
+        <item
+            android:id="@+id/nav_notice"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Notice" />
+        <item
+            android:id="@+id/nav_attendance"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Attendance Calculator" />
+        <item
+            android:id="@+id/nav_gpa"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="GPA Calculator" />
+        <item
+            android:id="@+id/nav_deflection"
+            android:title="Deflection Calculator"/>
+
+    </group>
+
+
+</menu>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.binaya.kuclassroom.MainActivity">
+
+    <TextView
+        android:id="@+id/Input_Desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:text="Enter the Total Credit of Course: "
+        android:textSize="15sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/calc"
+        android:layout_alignEnd="@+id/calc" />
+
+    <EditText
+        android:id="@+id/input"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Input_Desc"
+        android:layout_alignBottom="@+id/Input_Desc"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_toEndOf="@+id/Input_Desc"
+        android:layout_toRightOf="@+id/Input_Desc"
+        android:ems="10"
+        android:inputType="number"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/calc"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:text="Calculate"
+        android:textAlignment="center"
+        android:onClick="CalculateAns"/>
+
+    <TextView
+        android:id="@+id/calDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Input_Desc"
+        android:layout_alignStart="@+id/Input_Desc"
+        android:layout_below="@+id/calc"
+        android:layout_marginTop="23dp"
+        android:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/Ans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/calDesc"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_toEndOf="@+id/calDesc"
+        android:layout_toRightOf="@+id/calDesc"
+        android:textAllCaps="true"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
