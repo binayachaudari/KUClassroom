@@ -80,7 +80,7 @@ public class SeminarTalks extends Fragment {
 //        });
 
 
-        url = "hhttp://www.ku.edu.np/news/index.php?op=Default&postCategoryId=4&blogId=1";
+        url = "http://www.ku.edu.np/news/index.php?op=Default&postCategoryId=4&blogId=1";
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);

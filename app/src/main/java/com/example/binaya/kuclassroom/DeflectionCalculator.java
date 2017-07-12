@@ -1,6 +1,7 @@
 package com.example.binaya.kuclassroom;
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -59,6 +60,18 @@ public class DeflectionCalculator extends Fragment {
         int selected_id = radio_g.getCheckedRadioButtonId();
         total_marks = (RadioButton) view.findViewById(selected_id);
 
+        radio_g.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                switch (checkedId){
+                    case R.id.radioButton1:
+                        total_marks = (RadioButton) getView().findViewById(checkedId);
+                    case R.id.radioButton2:
+                        total_marks = (RadioButton) getView().findViewById(checkedId);
+                }
+            }
+        });
+
         calc_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,23 +82,40 @@ public class DeflectionCalculator extends Fragment {
 
                 //variable for calculation of deflection related values
                 float ratio=0;
-                int pass_marks = 0;         //pass marks in final
+                int final_pass_mark = 0; //pass marks in final
+                int internal_pass_mark = 0;
+                int full_marks = 0;
                 float internal_percentage=0;
                 float deflect_percentage=0;
                 float min_deflect_save=0;   //min marks to be safe from deflection
-                float Min_Grade = 0;           //min grade that can be obtained without deflection
+                float Min_Grade;
 
                 scroll.setVisibility(View.VISIBLE);
 
+                total_mark = Integer.parseInt(total_marks.getText().toString());
+                Log.d(TAG, "onClick: "+ total_mark);
+
+                if(total_mark == 25){
+                    final_pass_mark = 30;        //for final
+                    internal_pass_mark = 10;
+
+                }
+                else{
+                    final_pass_mark = 20;    //if total_marks == 50
+                    internal_pass_mark =20;
+                }
+
                 try{
                     obtained_mark = Integer.parseInt(obtained_marks.getText().toString()); //Convert String to Float
-                    total_mark = Integer.parseInt(total_marks.getText().toString());
-                    if(obtained_mark > total_mark || obtained_mark < 0){
-                        invalid = 1; //check for Marks>100 or Mars<0
+                    if(obtained_mark > total_mark ){
+                        invalid = invalid + 1; //check for Marks>100 or Mars<0
                         Toast.makeText(getActivity(), "Error: Mark cannot be Greater than "+ total_mark, Toast.LENGTH_SHORT).show();
-                        if(obtained_mark < 0)
-                            invalid = 2;
-                            Toast.makeText(getActivity(), "Error: Marks Cannot be Less than 0", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    if(obtained_mark <internal_pass_mark) {
+                        invalid += 1;
+                        Toast.makeText(getActivity(), "Internal marks cannot be less than " + internal_pass_mark, Toast.LENGTH_SHORT).show();
                     }
 
                 }catch(NumberFormatException ex){
@@ -93,48 +123,35 @@ public class DeflectionCalculator extends Fragment {
                     Toast.makeText(getActivity(), "Input Marks!", Toast.LENGTH_SHORT).show();
                 }
 
+
+
                 //min marks calculation
-                if(obtained_mark >= 8 && obtained_mark <= total_mark) {
-                    ratio = (float) obtained_mark / total_mark;
-                    internal_percentage = ratio * 100;
-                    deflect_percentage = internal_percentage - 25;
-                    min_deflect_save = (deflect_percentage / 100) * (100 - total_mark);
+                ratio = (float) obtained_mark/total_mark;
+                internal_percentage = ratio*100;
+                deflect_percentage = internal_percentage - 25;
+                min_deflect_save = (deflect_percentage/100) * (100-total_mark);
 
-                    DecimalFormat df = new DecimalFormat("#.##");
-                    min_deflect_save = Float.parseFloat(df.format(min_deflect_save));
+                DecimalFormat df = new DecimalFormat("#.##");
+                min_deflect_save = Float.parseFloat(df.format(min_deflect_save));
 
-                    Min_Grade = min_deflect_save + obtained_mark;
-                }
+                Min_Grade = min_deflect_save + obtained_mark;
 
-                //checking pass marks of final w.r.t internal full marks
-                if(total_mark == 25){
-                    pass_marks = 30;
-                }
-                else{
-                    pass_marks = 20;    //if total_marks == 50
-                }
 
-                //Setting TextView according to conditions!
                 if(invalid > 0 || empty == 1){
-                    if(invalid == 1)
-                        Text1.setText("Error: Mark cannot be Greater than "+ total_mark);
-                    if(invalid == 2)
-                        Text1.setText("Error: Marks Cannot be Less than 0");
-                    if(empty == 1)
-                        Text1.setText("Input Marks!");
+                    Text1.setText("");
                     Text2.setText("");
                     Text3.setText("");
                     Text4.setText("");
                     Text5.setText("");
                 }
-
                 else {
-                    Text1.setText("Minimum marks required to pass in final: " + pass_marks);
+                    Text1.setText("Minimum marks required to pass in final: " + final_pass_mark);
                     Text2.setText("Minimum marks in final to avoid deflection: " + min_deflect_save);
                     Text3.setText("Minimum grade that maybe obtained without deflection: " + getGrades(Min_Grade));
                     Text4.setText("Minimum grade that maybe obtained after deflection: ");
                     Text5.setText("Minimum marks required out of " + (100 - total_mark) + " to get an A: " + (80 - obtained_mark));
                 }
+
             }
         });
 
