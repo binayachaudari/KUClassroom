@@ -66,8 +66,10 @@ public class DeflectionCalculator extends Fragment {
                 switch (checkedId){
                     case R.id.radioButton1:
                         total_marks = (RadioButton) getView().findViewById(checkedId);
+                        break;
                     case R.id.radioButton2:
                         total_marks = (RadioButton) getView().findViewById(checkedId);
+                        break;
                 }
             }
         });
