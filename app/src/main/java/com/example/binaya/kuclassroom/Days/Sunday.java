@@ -5,10 +5,14 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +36,7 @@ public class Sunday extends Fragment {
 
     JSONParser parser;
     String Data;
+    @NonNull
     String URL = "https://binayachaudari.github.io/KUScheduleFiles/IIYIIS.json";
 
     String Subject;
@@ -43,7 +48,7 @@ public class Sunday extends Fragment {
     String Year;
     String Sem;
 
-    String version;
+    int version;
 
     StringBuffer sb;
 
@@ -51,24 +56,19 @@ public class Sunday extends Fragment {
 
     ConnectivityManager connMgr;
     NetworkInfo networkInfo;
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.sunday,container,false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.sunday, container, false);
 
         connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         networkInfo = connMgr.getActiveNetworkInfo();
 
-        display = (TextView) view.findViewById(R.id.JsonData);
-
         jsonData = new JsonDatabase(this.getActivity());
 
+        display = (TextView) view.findViewById(R.id.JsonData);
         sb = new StringBuffer();
-
-        if (networkInfo != null && networkInfo.isConnected())
-            Toast.makeText(getActivity(), "Connected To Internet", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(getActivity(), "Unable to Connect To Internet", Toast.LENGTH_LONG).show();
 
         return view;
     }
@@ -76,45 +76,63 @@ public class Sunday extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        {
-            {
-                /**
-                 * StrictMode is a developer tool which detects things you might be doing by accident and brings them to your attention so you can fix them.
-                 * StrictMode is most commonly used to catch accidental disk or network access on the application's main thread,
-                 * where UI operations are received and animations take place
-                 */
 
-                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-                StrictMode.setThreadPolicy(policy);
-                if (isFirstTime())
-                    getDataFromServer();
-                else
-                    getDataFormDatabase();
-            }
-        }
+        /**
+         * StrictMode is a developer tool which detects things you might be doing by accident and brings them to your attention so you can fix them.
+         * StrictMode is most commonly used to catch accidental disk or network access on the application's main thread,
+         * where UI operations are received and animations take place
+         */
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        if (isFirstTime())
+            if (networkInfo != null && networkInfo.isConnected()) {
+                Toast.makeText(getActivity(), "Connected To Internet", Toast.LENGTH_SHORT).show();
+                getDataFromServer();
+            } else
+                Toast.makeText(getActivity(), "Unable to Connect To Internet", Toast.LENGTH_LONG).show();
+        else
+            getDataFormDatabase();
+
+//        //Update The schedule if The version number is different
+//        SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
+//        int version = pref.getInt("Version_Control", 1);
+//        SharedPreferences.Editor editor = pref.edit();
+//        if (version != getVersion() && getVersion() != 0) {
+//            jsonData.ReplaceData();
+//            getDataFromServer();
+//            Fragment frg = null;
+//            frg = getFragmentManager().findFragmentByTag("Your_Fragment_TAG");
+//            final FragmentTransaction ft = getFragmentManager().beginTransaction();
+//            ft.detach(frg);
+//            ft.attach(frg);
+//            ft.commit();
+//            editor.putInt("Version_Control", getVersion());
+//            editor.commit();
+//        }
+//        else
+//            getDataFormDatabase();
+
     }
 
-    public void getDataFromServer(){
+    public void getDataFromServer() {
         parser = new JSONParser();
         Data = parser.getJson(URL);
-        if(Data != null) {
+        if (Data != null) {
             try {
                 JSONObject jsonObject = new JSONObject(Data);
-                version = jsonObject.getString("version");
                 JSONArray schedule = jsonObject.getJSONArray("schedule");
-                for(int i=0; i<schedule.length(); i++){
+                for (int i = 0; i < schedule.length(); i++) {
                     JSONObject eachObject = schedule.getJSONObject(i);
                     Subject = eachObject.getString("subject");
                     Lecturer = eachObject.getString("lecturer");
                     Day = eachObject.getString("day");
-                    Start =  eachObject.getString("start");
+                    Start = eachObject.getString("start");
                     End = eachObject.getString("end");
                     Dept = eachObject.getString("dept");
                     Year = eachObject.getString("year");
                     Sem = eachObject.getString("sem");
-
-                    jsonData.insertJSONData(Subject, Lecturer, Day , Start, End, Dept, Year ,Sem);
-
+                    jsonData.insertJSONData(Subject, Lecturer, Day, Start, End, Dept, Year, Sem);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -123,19 +141,21 @@ public class Sunday extends Fragment {
         getDataFormDatabase();
     }
 
-    public void getDataFormDatabase(){
+    public void getDataFormDatabase() {
         Cursor result = jsonData.DisplayJSONData(TAG);
-        if (result!= null && result.getCount()>0){
-            while(result.moveToNext()){
-                sb.append("Subject: "+result.getString(0)+"\n");
-                sb.append("Lecturer: "+result.getString(1)+"\n");
-                sb.append("Time: "+result.getString(3)+" - "+result.getString(4)+"\n\n");
+        if (result != null && result.getCount() > 0) {
+            while (result.moveToNext()) {
+                sb.append("Subject: " + result.getString(0) + "\n");
+                sb.append("Lecturer: " + result.getString(1) + "\n");
+                sb.append("Time: " + result.getString(3) + " - " + result.getString(4) + "\n\n");
             }
         }
         display.setText(sb.toString());
     }
 
     public boolean isFirstTime() {
+        //Returns the single SharedPreferences instance that can be used to retrieve and modify the preference values.
+        //MODE_PRIVATE: can only be accessed by the calling application
         SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         boolean ranBefore = preferences.getBoolean("Schedule", false);
         SharedPreferences.Editor editor = preferences.edit();
@@ -146,16 +166,45 @@ public class Sunday extends Fragment {
         return !ranBefore;
     }
 
-//    public boolean CheckUpdate(){
-//        int ver = Integer.parseInt(version);
-//        SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
-//        int VerCheck = pref.getInt("VersionNo",0);
-//        SharedPreferences.Editor editor = pref.edit();
-//        if (ver != VerCheck){
-//            editor.putInt("VersionNo",ver);
-//            editor.commit();
-//            return true;
+    public int getVersion() {
+        parser = new JSONParser();
+        Data = parser.getJson(URL);
+        if (Data != null) {
+            try {
+                JSONObject jsonObject = new JSONObject(Data);
+                version = jsonObject.getInt("version");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return version;
+    }
+//
+//@Nullable
+//    public void checkUpdates(){
+//        parser = new JSONParser();
+//        Data = parser.getJson(URL);
+//        if (Data != null) {
+//            try {
+//                JSONObject jsonObject = new JSONObject(Data);
+//                JSONArray schedule = jsonObject.getJSONArray("schedule");
+//                for (int i = 0; i < schedule.length(); i++) {
+//                    JSONObject eachObject = schedule.getJSONObject(i);
+//                    Subject = eachObject.getString("subject");
+//                    Lecturer = eachObject.getString("lecturer");
+//                    Day = eachObject.getString("day");
+//                    Start = eachObject.getString("start");
+//                    End = eachObject.getString("end");
+//                    Dept = eachObject.getString("dept");
+//                    Year = eachObject.getString("year");
+//                    Sem = eachObject.getString("sem");
+//
+//                    jsonData.insertJSONData(Subject, Lecturer, Day, Start, End, Dept, Year, Sem);
+//
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
 //        }
-//        return false;
 //    }
 }

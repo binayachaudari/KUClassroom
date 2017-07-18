@@ -15,6 +15,4 @@ public class About_Us_Activity extends AppCompatActivity {
         setTitle("About Us");
     }
 
-
-
 }

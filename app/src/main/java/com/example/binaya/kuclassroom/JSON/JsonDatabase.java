@@ -62,4 +62,10 @@ public class JsonDatabase extends SQLiteOpenHelper {
         Cursor result = db.rawQuery(Query,null);
         return result;
     }
+
+    public void ReplaceData(){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEDULE);
+        onCreate(db);
+    }
 }

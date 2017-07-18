@@ -81,6 +81,7 @@ public class Schedule extends Fragment {
         adapter.addFragment(new Wednesday(), "Wednesday");
         adapter.addFragment(new Thursday(), "Thursday");
         adapter.addFragment(new Friday(), "Friday");
+        adapter.notifyDataSetChanged();
         viewPager.setAdapter(adapter);
     }
 
