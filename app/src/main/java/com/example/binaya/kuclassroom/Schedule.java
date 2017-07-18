@@ -1,5 +1,12 @@
 package com.example.binaya.kuclassroom;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +17,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.binaya.kuclassroom.Days.Friday;
 import com.example.binaya.kuclassroom.Days.Monday;
@@ -21,11 +29,16 @@ import com.example.binaya.kuclassroom.NoticeTab.NewsEvents;
 import com.example.binaya.kuclassroom.NoticeTab.NoticeAnnouncement;
 import com.example.binaya.kuclassroom.NoticeTab.SeminarTalks;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by Binaya on 7/10/17.
  */
 
 public class Schedule extends Fragment {
+
     //It is a referenced variable of inner class SectionsPagerAdapter, which extends the FragmentPagerAdapter class
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -76,6 +89,7 @@ public class Schedule extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Schedule");
+
     }
 }
 
