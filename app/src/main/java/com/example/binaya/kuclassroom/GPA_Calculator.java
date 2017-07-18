@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -66,6 +67,10 @@ public class GPA_Calculator extends Fragment implements AdapterView.OnItemSelect
     ArrayList<String> Subject;
     ArrayList<String> CheckGrade;
 
+    String depart, year, sem;
+
+    Spinner Department,Year,Semester;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -119,6 +124,17 @@ public class GPA_Calculator extends Fragment implements AdapterView.OnItemSelect
         Department.setOnItemSelectedListener(this);
         Year.setOnItemSelectedListener(this);
         Semester.setOnItemSelectedListener(this);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        depart = prefs.getString(getString(R.string.departments),"CS");
+        year = prefs.getString(getString(R.string.year),"1st");
+        sem = prefs.getString(getString(R.string.sem),"1st");
+        int dept_select = getIndexOf(Department, depart);
+        int year_select = getIndexOf(Year,year);
+        int sem_select = getIndexOf(Semester,sem);
+        Department.setSelection(dept_select);
+        Year.setSelection(year_select);
+        Semester.setSelection(sem_select);
 
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -271,6 +287,18 @@ public class GPA_Calculator extends Fragment implements AdapterView.OnItemSelect
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("GPA Calculator");
+    }
+
+    //Returns the position in array of Spinner of String from setting activity
+    public int getIndexOf(Spinner spin, String mystring){
+        int index = 0;
+        for (int i = 0; i< spin.getCount();i++){
+            if (spin.getItemAtPosition(i).toString().equalsIgnoreCase(mystring)){
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 
 

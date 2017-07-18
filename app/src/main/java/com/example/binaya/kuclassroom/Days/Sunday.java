@@ -43,9 +43,9 @@ public class Sunday extends Fragment {
     String Year;
     String Sem;
 
-    StringBuffer sb;
-
     String version;
+
+    StringBuffer sb;
 
     TextView display;
 
@@ -145,4 +145,17 @@ public class Sunday extends Fragment {
         }
         return !ranBefore;
     }
+
+//    public boolean CheckUpdate(){
+//        int ver = Integer.parseInt(version);
+//        SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
+//        int VerCheck = pref.getInt("VersionNo",0);
+//        SharedPreferences.Editor editor = pref.edit();
+//        if (ver != VerCheck){
+//            editor.putInt("VersionNo",ver);
+//            editor.commit();
+//            return true;
+//        }
+//        return false;
+//    }
 }

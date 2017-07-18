@@ -10,11 +10,12 @@
     <string name="feedback">Feedback</string>
     <string name="title_activity_activity2">activity2</string>
 
+    <string name="departments">Departments</string>
     <string-array name="Departments">
         <item>CS</item>
         <item>CE</item>
     </string-array>
-
+    <string name="year">Year</string>
     <string-array name="Year">
         <item>1st</item>
         <item>2nd</item>
@@ -22,6 +23,7 @@
         <item>4th</item>
     </string-array>
 
+    <string name="sem">Semester</string>
     <string-array name="Semesters">
         <item>1st</item>
         <item>2nd</item>

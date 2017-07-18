@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Choose Level">
+    <ListPreference
+        android:key="@string/departments"
+        android:title="Department"
+        android:summary="%s"
+        android:entries="@array/Departments"
+        android:entryValues="@array/Departments"
+        />
+    <ListPreference
+        android:key="@string/year"
+        android:title="Year"
+        android:summary="%s"
+        android:entries="@array/Year"
+        android:entryValues="@array/Year"
+        />
+    <ListPreference
+        android:key="@string/sem"
+        android:title="Semester"
+        android:summary="%s"
+        android:entries="@array/Semesters"
+        android:entryValues="@array/Semesters"
+        />
+    </PreferenceCategory>
+
+</PreferenceScreen>

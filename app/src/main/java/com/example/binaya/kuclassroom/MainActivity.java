@@ -16,6 +16,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.binaya.kuclassroom.Days.Sunday;
 import com.example.binaya.kuclassroom.MenuActivity.*;
 
 public class MainActivity extends AppCompatActivity
@@ -66,7 +68,9 @@ public class MainActivity extends AppCompatActivity
         Intent feedback = new Intent(MainActivity.this,Feedback_Activity.class);
         switch (id){
             case R.id.action_settings:
-                break;
+//                if(new Sunday().CheckUpdate())
+//                new Sunday().getDataFromServer();
+//                break;
             case R.id.about_us:
                 startActivity(aboutus);
                 break;
@@ -93,7 +97,6 @@ public class MainActivity extends AppCompatActivity
 
     private void displaySelectedScreen(int id){
         Fragment fragment = null;
-        Fragment noti;
 
         switch(id){
             case R.id.nav_calendar:
@@ -116,7 +119,6 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_main,fragment);
             ft.commit();
-//            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
