@@ -179,32 +179,4 @@ public class Sunday extends Fragment {
         }
         return version;
     }
-//
-//@Nullable
-//    public void checkUpdates(){
-//        parser = new JSONParser();
-//        Data = parser.getJson(URL);
-//        if (Data != null) {
-//            try {
-//                JSONObject jsonObject = new JSONObject(Data);
-//                JSONArray schedule = jsonObject.getJSONArray("schedule");
-//                for (int i = 0; i < schedule.length(); i++) {
-//                    JSONObject eachObject = schedule.getJSONObject(i);
-//                    Subject = eachObject.getString("subject");
-//                    Lecturer = eachObject.getString("lecturer");
-//                    Day = eachObject.getString("day");
-//                    Start = eachObject.getString("start");
-//                    End = eachObject.getString("end");
-//                    Dept = eachObject.getString("dept");
-//                    Year = eachObject.getString("year");
-//                    Sem = eachObject.getString("sem");
-//
-//                    jsonData.insertJSONData(Subject, Lecturer, Day, Start, End, Dept, Year, Sem);
-//
-//                }
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 }

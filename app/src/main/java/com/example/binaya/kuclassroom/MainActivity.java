@@ -1,11 +1,13 @@
 package com.example.binaya.kuclassroom;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
 
+    ProgressDialog progressDialog;
 
     JsonDatabase jsonData;
 
@@ -82,6 +85,9 @@ public class MainActivity extends AppCompatActivity
 
         jsonData = new JsonDatabase(this);
 
+        connMgr = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        networkInfo = connMgr.getActiveNetworkInfo();
+
     }
 
     @Override
@@ -112,8 +118,9 @@ public class MainActivity extends AppCompatActivity
         Intent feedback = new Intent(MainActivity.this,Feedback_Activity.class);
         switch (id){
             case R.id.action_settings:
-                if (isUpdated())
-                    Toast.makeText(this, "New Schedule Updated!", Toast.LENGTH_SHORT).show();
+                if (isUpdated()) {
+                    new GetSchedule().execute();
+                }
                 else
                     Toast.makeText(this, "No New Schedule", Toast.LENGTH_SHORT).show();
                 break;
@@ -170,10 +177,45 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
     }
 
+
+
+    /**
+     * Async task class to get JSON by making JSONParser call
+     */
+    public class GetSchedule extends AsyncTask<String,Void,String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(MainActivity.this);
+            progressDialog.setMessage("Updating Schedule!");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            parser = new JSONParser();
+            Data = parser.getJson(URL);
+            getDataFromServer();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            // Dismiss the progress dialog
+            if (progressDialog.isShowing())
+                progressDialog.dismiss();
+
+            Toast.makeText(MainActivity.this, "New Schedule Updated!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void getDataFromServer() {
         parser = new JSONParser();
         Data = parser.getJson(URL);
         if (Data != null) {
+            jsonData.ReplaceData();
             try {
                 JSONObject jsonObject = new JSONObject(Data);
                 JSONArray schedule = jsonObject.getJSONArray("schedule");
@@ -212,18 +254,15 @@ public class MainActivity extends AppCompatActivity
     public boolean isUpdated(){
         //Update The schedule if The version number is different
         SharedPreferences pref = this.getPreferences(Context.MODE_PRIVATE);
-        int ver = pref.getInt("Version_Control", 0);
-        Log.d(TAG, "getUpdate: "+version);
-        Log.d(TAG, "getUpdate: "+getVersion());
+        int ver = pref.getInt("Version_Control", 1);
         SharedPreferences.Editor editor = pref.edit();
-        if (getVersion() != ver) {
-            jsonData.ReplaceData();
+        if (getVersion() != ver && networkInfo != null && networkInfo.isConnected()) {
             getDataFromServer();
             editor.putInt("Version_Control", getVersion());
             editor.commit();
             return true;
         }
         else
-        return false;
+            return false;
     }
 }
