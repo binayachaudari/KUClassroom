@@ -56,9 +56,9 @@ public class JsonDatabase extends SQLiteOpenHelper {
         db.insert(TABLE_SCHEDULE, null, contentValues);
     }
 
-    public Cursor DisplayJSONData(String day){
+    public Cursor DisplayJSONData(String day, String dept, String year, String sem){
         SQLiteDatabase db = getReadableDatabase();
-        String Query = "SELECT * FROM " + TABLE_SCHEDULE +" WHERE DAY = '" + day + "' AND DEPARTMENT = 'CS' AND YEAR = '2nd' AND SEMESTER = '2nd'";
+        String Query = "SELECT * FROM " + TABLE_SCHEDULE +" WHERE DAY = '" + day + "' AND DEPARTMENT = '" + dept + "' AND YEAR = '" + year + "' AND SEMESTER = '" + sem + "'";
         Cursor result = db.rawQuery(Query,null);
         return result;
     }

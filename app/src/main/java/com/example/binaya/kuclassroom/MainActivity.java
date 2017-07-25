@@ -49,8 +49,12 @@ public class MainActivity extends AppCompatActivity
 
     JSONParser parser;
     String Data;
-    @NonNull
-    String URL = "https://binayachaudari.github.io/KUScheduleFiles/IIYIIS.json";
+
+    String[] URL = {
+            "https://binayachaudari.github.io/KUScheduleFiles/IIYIIS.json",
+            "https://binayachaudari.github.io/KUScheduleFiles/IIIYIIS.json",
+            "https://binayachaudari.github.io/KUScheduleFiles/IVYIIS.json"
+    };
 
     String Subject;
     String Lecturer;
@@ -195,8 +199,10 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected String doInBackground(String... params) {
             parser = new JSONParser();
-            Data = parser.getJson(URL);
-            getDataFromServer();
+            for (int j= 0; j < URL.length; j++){
+                Data = parser.getJson(URL[j]);
+                getDataFromServer();
+            }
             return null;
         }
 
@@ -213,39 +219,43 @@ public class MainActivity extends AppCompatActivity
 
     public void getDataFromServer() {
         parser = new JSONParser();
-        Data = parser.getJson(URL);
-        if (Data != null) {
-            jsonData.ReplaceData();
-            try {
-                JSONObject jsonObject = new JSONObject(Data);
-                JSONArray schedule = jsonObject.getJSONArray("schedule");
-                for (int i = 0; i < schedule.length(); i++) {
-                    JSONObject eachObject = schedule.getJSONObject(i);
-                    Subject = eachObject.getString("subject");
-                    Lecturer = eachObject.getString("lecturer");
-                    Day = eachObject.getString("day");
-                    Start = eachObject.getString("start");
-                    End = eachObject.getString("end");
-                    Dept = eachObject.getString("dept");
-                    Year = eachObject.getString("year");
-                    Sem = eachObject.getString("sem");
-                    jsonData.insertJSONData(Subject, Lecturer, Day, Start, End, Dept, Year, Sem);
+        jsonData.ReplaceData();
+        for(int j = 0; j<URL.length;j++) {
+            Data = parser.getJson(URL[j]);
+            if (Data != null) {
+                try {
+                    JSONObject jsonObject = new JSONObject(Data);
+                    JSONArray schedule = jsonObject.getJSONArray("schedule");
+                    for (int i = 0; i < schedule.length(); i++) {
+                        JSONObject eachObject = schedule.getJSONObject(i);
+                        Subject = eachObject.getString("subject");
+                        Lecturer = eachObject.getString("lecturer");
+                        Day = eachObject.getString("day");
+                        Start = eachObject.getString("start");
+                        End = eachObject.getString("end");
+                        Dept = eachObject.getString("dept");
+                        Year = eachObject.getString("year");
+                        Sem = eachObject.getString("sem");
+                        jsonData.insertJSONData(Subject, Lecturer, Day, Start, End, Dept, Year, Sem);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
         }
     }
 
     public int getVersion() {
         parser = new JSONParser();
-        Data = parser.getJson(URL);
-        if (Data != null) {
-            try {
-                JSONObject jsonObject = new JSONObject(Data);
-                version = jsonObject.getInt("version");
-            } catch (JSONException e) {
-                e.printStackTrace();
+        for (int j = 0; j < URL.length;j++) {
+            Data = parser.getJson(URL[j]);
+            if (Data != null) {
+                try {
+                    JSONObject jsonObject = new JSONObject(Data);
+                    version = jsonObject.getInt("version");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return version;

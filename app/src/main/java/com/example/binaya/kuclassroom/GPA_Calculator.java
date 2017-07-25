@@ -104,9 +104,9 @@ public class GPA_Calculator extends Fragment implements AdapterView.OnItemSelect
 
         calculate = (Button) view.findViewById(R.id.calculate);
 
-        Spinner Department = (Spinner) view.findViewById(R.id.spinner_dept);
-        Spinner Year = (Spinner) view.findViewById(R.id.spinner_year);
-        Spinner Semester = (Spinner) view.findViewById(R.id.spinner_sem);
+        Department = (Spinner) view.findViewById(R.id.spinner_dept);
+        Year = (Spinner) view.findViewById(R.id.spinner_year);
+        Semester = (Spinner) view.findViewById(R.id.spinner_sem);
 
         //ArrayAdapter(Context context, int resource, int textViewResourceId);
         ArrayAdapter<String> myAdapter_Department =  new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Departments));
@@ -125,6 +125,7 @@ public class GPA_Calculator extends Fragment implements AdapterView.OnItemSelect
         Year.setOnItemSelectedListener(this);
         Semester.setOnItemSelectedListener(this);
 
+        //Getting String Data from Setting window
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         depart = prefs.getString(getString(R.string.departments),"CS");
         year = prefs.getString(getString(R.string.year),"1st");

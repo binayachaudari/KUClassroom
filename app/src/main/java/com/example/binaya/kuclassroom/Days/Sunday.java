@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -36,8 +37,14 @@ public class Sunday extends Fragment {
 
     JSONParser parser;
     String Data;
-    @NonNull
-    String URL = "https://binayachaudari.github.io/KUScheduleFiles/IIYIIS.json";
+
+    String[] URL = {
+            "https://binayachaudari.github.io/KUScheduleFiles/IIYIIS.json",
+            "https://binayachaudari.github.io/KUScheduleFiles/IIIYIIS.json",
+            "https://binayachaudari.github.io/KUScheduleFiles/IVYIIS.json"
+    };
+
+    String depart, year, sem;
 
     String Subject;
     String Lecturer;
@@ -47,8 +54,6 @@ public class Sunday extends Fragment {
     String Dept;
     String Year;
     String Sem;
-
-    int version;
 
     StringBuffer sb;
 
@@ -67,8 +72,15 @@ public class Sunday extends Fragment {
 
         jsonData = new JsonDatabase(this.getActivity());
 
+
         display = (TextView) view.findViewById(R.id.JsonData);
         sb = new StringBuffer();
+
+        //Getting String Data from Setting window
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        depart = prefs.getString(getString(R.string.departments),"CS");
+        year = prefs.getString(getString(R.string.year),"1st");
+        sem = prefs.getString(getString(R.string.sem),"1st");
 
         return view;
     }
@@ -93,64 +105,47 @@ public class Sunday extends Fragment {
                 Toast.makeText(getActivity(), "Unable to Connect To Internet", Toast.LENGTH_LONG).show();
         else
             getDataFormDatabase();
-
-//        //Update The schedule if The version number is different
-//        SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
-//        int version = pref.getInt("Version_Control", 1);
-//        SharedPreferences.Editor editor = pref.edit();
-//        if (version != getVersion() && getVersion() != 0) {
-//            jsonData.ReplaceData();
-//            getDataFromServer();
-//            Fragment frg = null;
-//            frg = getFragmentManager().findFragmentByTag("Your_Fragment_TAG");
-//            final FragmentTransaction ft = getFragmentManager().beginTransaction();
-//            ft.detach(frg);
-//            ft.attach(frg);
-//            ft.commit();
-//            editor.putInt("Version_Control", getVersion());
-//            editor.commit();
-//        }
-//        else
-//            getDataFormDatabase();
-
     }
 
     public void getDataFromServer() {
         parser = new JSONParser();
-        Data = parser.getJson(URL);
-        if (Data != null) {
-            try {
-                JSONObject jsonObject = new JSONObject(Data);
-                JSONArray schedule = jsonObject.getJSONArray("schedule");
-                for (int i = 0; i < schedule.length(); i++) {
-                    JSONObject eachObject = schedule.getJSONObject(i);
-                    Subject = eachObject.getString("subject");
-                    Lecturer = eachObject.getString("lecturer");
-                    Day = eachObject.getString("day");
-                    Start = eachObject.getString("start");
-                    End = eachObject.getString("end");
-                    Dept = eachObject.getString("dept");
-                    Year = eachObject.getString("year");
-                    Sem = eachObject.getString("sem");
-                    jsonData.insertJSONData(Subject, Lecturer, Day, Start, End, Dept, Year, Sem);
+        for (int j = 0; j < URL.length; j++) {
+            Data = parser.getJson(URL[j]);
+            if (Data != null) {
+                try {
+                    JSONObject jsonObject = new JSONObject(Data);
+                    JSONArray schedule = jsonObject.getJSONArray("schedule");
+                    for (int i = 0; i < schedule.length(); i++) {
+                        JSONObject eachObject = schedule.getJSONObject(i);
+                        Subject = eachObject.getString("subject");
+                        Lecturer = eachObject.getString("lecturer");
+                        Day = eachObject.getString("day");
+                        Start = eachObject.getString("start");
+                        End = eachObject.getString("end");
+                        Dept = eachObject.getString("dept");
+                        Year = eachObject.getString("year");
+                        Sem = eachObject.getString("sem");
+                        jsonData.insertJSONData(Subject, Lecturer, Day, Start, End, Dept, Year, Sem);}
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
         }
-        getDataFormDatabase();
+            getDataFormDatabase();
     }
 
     public void getDataFormDatabase() {
-        Cursor result = jsonData.DisplayJSONData(TAG);
+        Cursor result = jsonData.DisplayJSONData(TAG, depart, year,sem);
         if (result != null && result.getCount() > 0) {
             while (result.moveToNext()) {
                 sb.append("Subject: " + result.getString(0) + "\n");
                 sb.append("Lecturer: " + result.getString(1) + "\n");
                 sb.append("Time: " + result.getString(3) + " - " + result.getString(4) + "\n\n");
             }
+            display.setText(sb.toString());
         }
-        display.setText(sb.toString());
+        else
+            display.setText("NO CLASSES!!");
     }
 
     public boolean isFirstTime() {
@@ -164,19 +159,5 @@ public class Sunday extends Fragment {
             editor.commit();
         }
         return !ranBefore;
-    }
-
-    public int getVersion() {
-        parser = new JSONParser();
-        Data = parser.getJson(URL);
-        if (Data != null) {
-            try {
-                JSONObject jsonObject = new JSONObject(Data);
-                version = jsonObject.getInt("version");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return version;
     }
 }

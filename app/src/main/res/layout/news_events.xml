@@ -16,7 +16,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#A6ACAF"
+        android:background="@drawable/side_nav_bar"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:orientation="horizontal"
@@ -28,6 +28,7 @@
             android:layout_height="48dp"
             android:layout_weight="1"
             android:text="Search"
+            android:background="#fff"
             android:textColor="@drawable/colorselector1" />
 
       <EditText
