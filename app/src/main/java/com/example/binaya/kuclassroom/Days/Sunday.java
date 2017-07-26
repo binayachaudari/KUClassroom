@@ -67,6 +67,7 @@ public class Sunday extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sunday, container, false);
 
+        //To check/get Internet connection
         connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         networkInfo = connMgr.getActiveNetworkInfo();
 
@@ -76,7 +77,7 @@ public class Sunday extends Fragment {
         display = (TextView) view.findViewById(R.id.JsonData);
         sb = new StringBuffer();
 
-        //Getting String Data from Setting window
+        //Getting String Data from Setting window using preference list
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         depart = prefs.getString(getString(R.string.departments),"CS");
         year = prefs.getString(getString(R.string.year),"1st");
@@ -106,7 +107,7 @@ public class Sunday extends Fragment {
         else
             getDataFormDatabase();
     }
-
+//Gets data from server from provided URL array
     public void getDataFromServer() {
         parser = new JSONParser();
         for (int j = 0; j < URL.length; j++) {
@@ -134,6 +135,7 @@ public class Sunday extends Fragment {
             getDataFormDatabase();
     }
 
+//Gets Data from the JsonDatabase
     public void getDataFormDatabase() {
         Cursor result = jsonData.DisplayJSONData(TAG, depart, year,sem);
         if (result != null && result.getCount() > 0) {
@@ -148,6 +150,7 @@ public class Sunday extends Fragment {
             display.setText("NO CLASSES!!");
     }
 
+//Is app running for first time??
     public boolean isFirstTime() {
         //Returns the single SharedPreferences instance that can be used to retrieve and modify the preference values.
         //MODE_PRIVATE: can only be accessed by the calling application

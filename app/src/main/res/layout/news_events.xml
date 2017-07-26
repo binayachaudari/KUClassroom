@@ -24,11 +24,11 @@
 
         <Button
             android:id="@+id/button"
+            style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_weight="1"
             android:text="Search"
-            android:background="#fff"
             android:textColor="@drawable/colorselector1" />
 
       <EditText

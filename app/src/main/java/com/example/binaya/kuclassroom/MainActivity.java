@@ -119,11 +119,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Intent aboutus = new Intent(MainActivity.this,About_Us_Activity.class);
         Intent settings = new Intent(MainActivity.this,Settings_Activity.class);
-        Intent feedback = new Intent(MainActivity.this,Feedback_Activity.class);
         switch (id){
             case R.id.action_settings:
-                if (isUpdated()) {
-                    new GetSchedule().execute();
+                if (isUpdated()) { //Check for the version number
+                    new GetSchedule().execute(); //Executes GetSchedule Class (AsyncTask)
                 }
                 else
                     Toast.makeText(this, "No New Schedule", Toast.LENGTH_SHORT).show();
@@ -133,9 +132,6 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.settings:
                 startActivity(settings);
-                break;
-            case R.id.feedback:
-                startActivity(feedback);
                 break;
         }
 

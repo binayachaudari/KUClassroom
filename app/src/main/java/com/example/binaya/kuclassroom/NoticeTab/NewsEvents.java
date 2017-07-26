@@ -126,6 +126,4 @@ public class NewsEvents extends Fragment{
                     "})()");
         }
     }
-
-
 }
