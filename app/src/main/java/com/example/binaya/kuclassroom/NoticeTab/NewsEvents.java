@@ -70,16 +70,8 @@ public class NewsEvents extends Fragment{
                         return true;
                     }
                     else{
-
-                        Fragment fragment = null;
-                        fragment = new Schedule();
-                        if (fragment != null) {
-                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                            ft.replace(R.id.content_main, fragment);
-                            ft.commit();
+                        return false;
                         }
-                        return true;
-                    }
                 }
                 return false;
             }

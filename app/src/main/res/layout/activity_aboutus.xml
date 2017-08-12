@@ -5,6 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/optionmenu"
-    tools:context="com.example.binaya.kuclassroom.MenuActivity.About_Us_Activity">
+    tools:context="com.example.binaya.kuclassroom.MenuActivity.About_Us_Activity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:srcCompat="@mipmap/aboutus"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 </android.support.constraint.ConstraintLayout>
