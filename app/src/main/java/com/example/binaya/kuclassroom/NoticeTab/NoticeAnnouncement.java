@@ -40,10 +40,9 @@ public class NoticeAnnouncement extends Fragment {
         search = (Button) view.findViewById(R.id.button);
         editText = (EditText) view.findViewById(R.id.editText);
 //        final SwipeRefreshLayout swipeToRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
-        final TextView txt = (TextView) view.findViewById(R.id.txtInfo);
+        txt = (TextView) view.findViewById(R.id.txtInfo);
         webView = (WebView) view.findViewById(R.id.webView);
         webView.setWebViewClient(new NoticeAnnouncement.MyBrowser());  //set the WebViewClient of your WebView to the custom subclass that you created in your code.
-        txt.setText("Notice And Announcements!");
 
         search.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

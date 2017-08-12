@@ -38,10 +38,9 @@ public class SeminarTalks extends Fragment {
         search = (Button) view.findViewById(R.id.button);
         editText = (EditText) view.findViewById(R.id.editText);
 //        final SwipeRefreshLayout swipeToRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
-        final TextView txt = (TextView) view.findViewById(R.id.txtInfo);
+        txt = (TextView) view.findViewById(R.id.txtInfo);
         webView = (WebView) view.findViewById(R.id.webView);
         webView.setWebViewClient(new SeminarTalks.MyBrowser());  //set the WebViewClient of your WebView to the custom subclass that you created in your code.
-        txt.setText("Seminar and Talks!");
 
 
         search.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +93,7 @@ public class SeminarTalks extends Fragment {
         webView.getSettings().setDomStorageEnabled(true); //Enables storage of cookie
         webView.getSettings().setEnableSmoothTransition(true);
 
-        txt.setText("Notices & Announcements");
+        txt.setText("Seminar &  Talks");
 
         return view;
     }
