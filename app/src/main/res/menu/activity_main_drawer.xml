@@ -4,24 +4,24 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_calendar"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_cal"
             android:title="Calendar" />
         <item
             android:id="@+id/nav_notice"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_menu_notice"
             android:title="Notice" />
         <item
             android:id="@+id/nav_attendance"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_menu_acal"
             android:title="Attendance Calculator" />
         <item
             android:id="@+id/nav_gpa"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_gpa"
             android:title="GPA Calculator" />
         <item
             android:id="@+id/nav_deflection"
+            android:icon="@drawable/ic_menu_dcal"
             android:title="Deflection Calculator"/>
-
     </group>
 
 

@@ -1,37 +1,22 @@
 package com.example.binaya.kuclassroom;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
+import android.widget.LinearLayout;
 import com.example.binaya.kuclassroom.Days.Friday;
 import com.example.binaya.kuclassroom.Days.Monday;
 import com.example.binaya.kuclassroom.Days.Sunday;
 import com.example.binaya.kuclassroom.Days.Thursday;
 import com.example.binaya.kuclassroom.Days.Tuesday;
 import com.example.binaya.kuclassroom.Days.Wednesday;
-import com.example.binaya.kuclassroom.NoticeTab.NewsEvents;
-import com.example.binaya.kuclassroom.NoticeTab.NoticeAnnouncement;
-import com.example.binaya.kuclassroom.NoticeTab.SeminarTalks;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by Binaya on 7/10/17.
@@ -42,6 +27,12 @@ public class Schedule extends Fragment {
     //It is a referenced variable of inner class SectionsPagerAdapter, which extends the FragmentPagerAdapter class
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
+    //Floating Action Button
+    FloatingActionButton fab_plus, fab_not, fab_def, fab_cal, fab_attendace;
+    boolean isOpen = false;
+
+    Fragment fragment;
+
     // ViewPager -> Layout manager that allows the user to flip left and right through pages of data.
     private ViewPager mViewPager;
 
@@ -50,16 +41,107 @@ public class Schedule extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.schedule,container, false);
 
-//        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//            }
-//        });
 
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-//        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        fab_plus = (FloatingActionButton) view.findViewById(R.id.fab_plus);
+        fab_def = (FloatingActionButton) view.findViewById(R.id.fab_def);
+        fab_cal = (FloatingActionButton) view.findViewById(R.id.fab_cal);
+        fab_not = (FloatingActionButton) view.findViewById(R.id.fab_not);
+        fab_attendace = (FloatingActionButton) view.findViewById(R.id.fab_attendance);
+
+        final LinearLayout notice = (LinearLayout) view.findViewById(R.id.notice);
+        final LinearLayout attendance = (LinearLayout) view.findViewById(R.id.attendance);
+        final LinearLayout gpa = (LinearLayout) view.findViewById(R.id.GPA);
+        final LinearLayout deflection = (LinearLayout) view.findViewById(R.id.Deflection);
+        fab_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isOpen) {
+
+
+                    fab_not.setVisibility(View.GONE);
+                    fab_def.setVisibility(View.GONE);
+                    fab_cal.setVisibility(View.GONE);
+                    fab_attendace.setVisibility(View.GONE);
+                    gpa.setVisibility(View.GONE);
+                    notice.setVisibility(View.GONE);
+                    deflection.setVisibility(View.GONE);
+                    attendance.setVisibility(View.GONE);
+
+                    isOpen = false;
+                } else {
+
+                    fab_not.setVisibility(View.VISIBLE);
+                    fab_def.setVisibility(View.VISIBLE);
+                    fab_cal.setVisibility(View.VISIBLE);
+                    fab_attendace.setVisibility(View.VISIBLE);
+                    gpa.setVisibility(View.VISIBLE);
+                    notice.setVisibility(View.VISIBLE);
+                    deflection.setVisibility(View.VISIBLE);
+                    attendance.setVisibility(View.VISIBLE);
+
+                    isOpen = true;
+                }
+
+
+                fab_def.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        isOpen = false;
+
+                        fragment = new DeflectionCalculator();
+                        if (fragment != null) {
+                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                            ft.replace(R.id.content_main, fragment);
+                            ft.commit();
+                        }
+                    }
+
+                });
+                fab_not.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        isOpen = false;
+
+                        fragment = new Notice();
+                        if (fragment != null) {
+                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                            ft.replace(R.id.content_main, fragment);
+                            ft.commit();
+                        }
+                    }
+                });
+                fab_cal.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        isOpen = false;
+
+
+                        fragment = new GPA_Calculator();
+                        if (fragment != null) {
+                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                            ft.replace(R.id.content_main, fragment);
+                            ft.commit();
+                        }
+                    }
+                });
+                fab_attendace.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        isOpen = false;
+
+                       fragment = new Attendance();
+                        if (fragment != null) {
+                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                            ft.replace(R.id.content_main, fragment);
+                            ft.commit();
+                        }
+                    }
+                });
+
+            }
+
+        });
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) view.findViewById(R.id.container_schedule);

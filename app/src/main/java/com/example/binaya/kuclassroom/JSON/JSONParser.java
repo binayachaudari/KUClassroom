@@ -12,8 +12,6 @@ import java.net.URL;
  */
 
 public class JSONParser {
-    private static final String TAG = "JSONParser";
-    private static final String check = "https://binayachaudari.github.io/KUScheduleFiles/IIYIIS.json";
 
     public String getJson(String Passed_url){
         HttpURLConnection connection = null;

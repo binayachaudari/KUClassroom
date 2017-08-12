@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.binaya.kuclassroom.DeflectionCalculator;
 import com.example.binaya.kuclassroom.R;
+import com.example.binaya.kuclassroom.Schedule;
 
 
 /**
@@ -67,7 +70,15 @@ public class NewsEvents extends Fragment{
                         return true;
                     }
                     else{
-                        return false;
+
+                        Fragment fragment = null;
+                        fragment = new Schedule();
+                        if (fragment != null) {
+                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                            ft.replace(R.id.content_main, fragment);
+                            ft.commit();
+                        }
+                        return true;
                     }
                 }
                 return false;
