@@ -41,6 +41,7 @@ public class SeminarTalks extends Fragment {
         final TextView txt = (TextView) view.findViewById(R.id.txtInfo);
         webView = (WebView) view.findViewById(R.id.webView);
         webView.setWebViewClient(new SeminarTalks.MyBrowser());  //set the WebViewClient of your WebView to the custom subclass that you created in your code.
+        txt.setText("Seminar and Talks!");
 
 
         search.setOnClickListener(new View.OnClickListener() {
