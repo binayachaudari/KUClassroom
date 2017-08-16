@@ -85,9 +85,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        displaySelectedScreen(R.id.nav_calendar);
+        displaySelectedScreen(R.id.nav_calendar); //Displays Schedule Fragemnt as default
 
-        jsonData = new JsonDatabase(this);
+        jsonData = new JsonDatabase(this); //Calls the constructor of JsonDatabase.java
 
         connMgr = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         networkInfo = connMgr.getActiveNetworkInfo();
