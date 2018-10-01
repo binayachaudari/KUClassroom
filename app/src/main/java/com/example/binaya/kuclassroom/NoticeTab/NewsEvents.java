@@ -113,6 +113,8 @@ public class NewsEvents extends Fragment{
             return true;
         }
 
+
+
         @Override
         public void onPageFinished(WebView view, String url)
         {

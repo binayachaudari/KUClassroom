@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MenuActivity.About_Us_Activity" android:parentActivityName=".MainActivity"/>
-        <activity android:name=".MenuActivity.Settings_Activity" android:parentActivityName=".MainActivity" />
+        <activity android:name=".MenuActivity.Settings_Activity" android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>

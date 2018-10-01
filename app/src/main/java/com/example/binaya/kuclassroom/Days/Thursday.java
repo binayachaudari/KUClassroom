@@ -1,5 +1,6 @@
 package com.example.binaya.kuclassroom.Days;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -44,14 +45,9 @@ public class Thursday extends Fragment {
         return view;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        getDataFormDatabase();
-    }
-
     public void getDataFormDatabase(){
         Cursor result = jsonData.DisplayJSONData(TAG, depart, year, sem);
+        sb.setLength(0);
         if (result!= null && result.getCount()>0){
             while(result.moveToNext()){
                 sb.append("Subject: "+result.getString(0)+"\n");
@@ -63,4 +59,25 @@ public class Thursday extends Fragment {
         else
             display.setText("NO CLASSES!!");
     }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser){
+            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //Getting String Data from Setting window
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        depart = prefs.getString(getString(R.string.departments),"CS");
+        year = prefs.getString(getString(R.string.year),"1st");
+        sem = prefs.getString(getString(R.string.sem),"1st");
+
+        getDataFormDatabase();
+    }
+
 }
