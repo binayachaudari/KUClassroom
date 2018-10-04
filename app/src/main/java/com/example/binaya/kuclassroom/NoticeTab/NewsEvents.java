@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +16,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.binaya.kuclassroom.DeflectionCalculator;
 import com.example.binaya.kuclassroom.R;
-import com.example.binaya.kuclassroom.Schedule;
-
 
 /**
  * Created by Binaya on 6/3/17.
@@ -41,11 +35,11 @@ public class NewsEvents extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.news_events, container, false);
-        search = (Button) view.findViewById(R.id.button);
-        editText = (EditText) view.findViewById(R.id.editText);
+        search = view.findViewById(R.id.button);
+        editText = view.findViewById(R.id.editText);
 //        final SwipeRefreshLayout swipeToRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
-        txt = (TextView) view.findViewById(R.id.txtInfo);
-        webView = (WebView) view.findViewById(R.id.webView);
+        txt = view.findViewById(R.id.txtInfo);
+        webView = view.findViewById(R.id.webView);
         webView.setWebViewClient(new MyBrowser());  //set the WebViewClient of your WebView to the custom subclass that you created in your code.
 
 

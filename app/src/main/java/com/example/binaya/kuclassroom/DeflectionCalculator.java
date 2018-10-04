@@ -44,31 +44,31 @@ public class DeflectionCalculator extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.deflection, container, false);
-        radio_g = (RadioGroup) view.findViewById(R.id.Radiogroup);
-        calc_btn = (Button) view.findViewById(R.id.calculate_btn);
-        obtained_marks = (EditText) view.findViewById(R.id.internal_marks);
+        radio_g = view.findViewById(R.id.Radiogroup);
+        calc_btn = view.findViewById(R.id.calculate_btn);
+        obtained_marks = view.findViewById(R.id.internal_marks);
 
-        scroll = (ScrollView) view.findViewById(R.id.scroll);
+        scroll =  view.findViewById(R.id.scroll);
         scroll.setVisibility(View.GONE);
 
-        Text1 = (TextView) view.findViewById(R.id.textView3);
-        Text2 = (TextView) view.findViewById(R.id.textView4);
-        Text3 = (TextView) view.findViewById(R.id.textView5);
-        Text4 = (TextView) view.findViewById(R.id.textView6);
-        Text5 = (TextView) view.findViewById(R.id.textView7);
+        Text1 = view.findViewById(R.id.textView3);
+        Text2 = view.findViewById(R.id.textView4);
+        Text3 = view.findViewById(R.id.textView5);
+        Text4 = view.findViewById(R.id.textView6);
+        Text5 = view.findViewById(R.id.textView7);
 
         int selected_id = radio_g.getCheckedRadioButtonId();
-        total_marks = (RadioButton) view.findViewById(selected_id);
+        total_marks = view.findViewById(selected_id);
 
         radio_g.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 switch (checkedId){
                     case R.id.radioButton1:
-                        total_marks = (RadioButton) getView().findViewById(checkedId);
+                        total_marks = getView().findViewById(checkedId);
                         break;
                     case R.id.radioButton2:
-                        total_marks = (RadioButton) getView().findViewById(checkedId);
+                        total_marks = getView().findViewById(checkedId);
                         break;
                 }
             }

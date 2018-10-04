@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.binaya.kuclassroom.JSON.JsonDatabase;
 import com.example.binaya.kuclassroom.R;
 
@@ -30,7 +28,7 @@ public class Friday extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.friday,container,false);
-        display = (TextView) view.findViewById(R.id.JsonData);
+        display = view.findViewById(R.id.JsonData);
 
         //Getting String Data from Setting window
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());

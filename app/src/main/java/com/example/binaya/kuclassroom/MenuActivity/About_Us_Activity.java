@@ -12,7 +12,7 @@ public class About_Us_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aboutus);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        setTitle("About Us");
+        setTitle("Developers!");
     }
 
 }

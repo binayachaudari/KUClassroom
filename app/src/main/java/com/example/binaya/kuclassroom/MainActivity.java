@@ -4,20 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -26,15 +18,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.binaya.kuclassroom.Days.Monday;
-import com.example.binaya.kuclassroom.Days.Sunday;
 import com.example.binaya.kuclassroom.JSON.JSONParser;
 import com.example.binaya.kuclassroom.JSON.JsonDatabase;
 import com.example.binaya.kuclassroom.MenuActivity.*;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,8 +29,6 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
-
-    ProgressDialog progressDialog;
 
     JsonDatabase jsonData;
 
@@ -85,7 +70,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        displaySelectedScreen(R.id.nav_calendar); //Displays Schedule Fragemnt as default
+        displaySelectedScreen(R.id.nav_calendar); //Displays Schedule Fragment as default
 
         jsonData = new JsonDatabase(this); //Calls the constructor of JsonDatabase.java
 
@@ -183,10 +168,17 @@ public class MainActivity extends AppCompatActivity
      * Async task class to get JSON by making JSONParser call
      */
     public class GetSchedule extends AsyncTask<String,Void,String> {
+        ProgressDialog progressDialog;
+
+        JSONParser parser;
+
+        GetSchedule(){
+
+        }
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new ProgressDialog(MainActivity.this);
+            progressDialog = new ProgressDialog(getApplicationContext());
             progressDialog.setMessage("Updating Schedule!");
             progressDialog.setCancelable(false);
             progressDialog.show();
@@ -194,7 +186,6 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         protected String doInBackground(String... params) {
-            parser = new JSONParser();
             for (int j= 0; j < URL.length; j++){
                 Data = parser.getJson(URL[j]);
                 getDataFromServer();

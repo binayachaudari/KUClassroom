@@ -76,36 +76,36 @@ public class GPA_Calculator extends Fragment implements AdapterView.OnItemSelect
         View view= inflater.inflate(R.layout.gpacalculator,container, false);
         myDb = new DatabaseHelper(this.getActivity());
 
-        GPA_Display = (TextView) view.findViewById(R.id.GPA);
-        Grade_Display = (TextView) view.findViewById(R.id.GPAdesc);
+        GPA_Display = view.findViewById(R.id.GPA);
+        Grade_Display = view.findViewById(R.id.GPAdesc);
 
-        Subject1 = (TextView) view.findViewById(R.id.Subject1);
-        Subject2 = (TextView) view.findViewById(R.id.Subject2);
-        Subject3 = (TextView) view.findViewById(R.id.Subject3);
-        Subject4 = (TextView) view.findViewById(R.id.Subject4);
-        Subject5 = (TextView) view.findViewById(R.id.Subject5);
-        Subject6 = (TextView) view.findViewById(R.id.Subject6);
-        Subject7 = (TextView) view.findViewById(R.id.Subject7);
-        Subject8 = (TextView) view.findViewById(R.id.Subject8);
-        Subject9 = (TextView) view.findViewById(R.id.Subject9);
-        Subject10 = (TextView) view.findViewById(R.id.Subject10);
+        Subject1 = view.findViewById(R.id.Subject1);
+        Subject2 = view.findViewById(R.id.Subject2);
+        Subject3 = view.findViewById(R.id.Subject3);
+        Subject4 = view.findViewById(R.id.Subject4);
+        Subject5 = view.findViewById(R.id.Subject5);
+        Subject6 = view.findViewById(R.id.Subject6);
+        Subject7 = view.findViewById(R.id.Subject7);
+        Subject8 = view.findViewById(R.id.Subject8);
+        Subject9 = view.findViewById(R.id.Subject9);
+        Subject10 = view.findViewById(R.id.Subject10);
 
-        Mark1 = (EditText) view.findViewById(R.id.Mark1);
-        Mark2 = (EditText) view.findViewById(R.id.Mark2);
-        Mark3 = (EditText) view.findViewById(R.id.Mark3);
-        Mark4 = (EditText) view.findViewById(R.id.Mark4);
-        Mark5 = (EditText) view.findViewById(R.id.Mark5);
-        Mark6 = (EditText) view.findViewById(R.id.Mark6);
-        Mark7 = (EditText) view.findViewById(R.id.Mark7);
-        Mark8 = (EditText) view.findViewById(R.id.Mark8);
-        Mark9 = (EditText) view.findViewById(R.id.Mark9);
-        Mark10 = (EditText) view.findViewById(R.id.Mark10);
+        Mark1 = view.findViewById(R.id.Mark1);
+        Mark2 = view.findViewById(R.id.Mark2);
+        Mark3 = view.findViewById(R.id.Mark3);
+        Mark4 = view.findViewById(R.id.Mark4);
+        Mark5 = view.findViewById(R.id.Mark5);
+        Mark6 = view.findViewById(R.id.Mark6);
+        Mark7 = view.findViewById(R.id.Mark7);
+        Mark8 = view.findViewById(R.id.Mark8);
+        Mark9 = view.findViewById(R.id.Mark9);
+        Mark10 = view.findViewById(R.id.Mark10);
 
-        calculate = (Button) view.findViewById(R.id.calculate);
+        calculate = view.findViewById(R.id.calculate);
 
-        Department = (Spinner) view.findViewById(R.id.spinner_dept);
-        Year = (Spinner) view.findViewById(R.id.spinner_year);
-        Semester = (Spinner) view.findViewById(R.id.spinner_sem);
+        Department = view.findViewById(R.id.spinner_dept);
+        Year = view.findViewById(R.id.spinner_year);
+        Semester = view.findViewById(R.id.spinner_sem);
 
         //ArrayAdapter(Context context, int resource, int textViewResourceId);
         ArrayAdapter<String> myAdapter_Department =  new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Departments));

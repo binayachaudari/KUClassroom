@@ -5,21 +5,17 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.binaya.kuclassroom.R;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -74,7 +70,7 @@ public class Sunday extends Fragment {
         jsonData = new JsonDatabase(this.getActivity());
 
 
-        display = (TextView) view.findViewById(R.id.JsonData);
+        display = view.findViewById(R.id.JsonData);
         sb = new StringBuffer();
 
         //Getting String Data from Setting window using preference list

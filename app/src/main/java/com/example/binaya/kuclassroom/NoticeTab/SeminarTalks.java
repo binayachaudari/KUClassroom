@@ -15,7 +15,6 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.example.binaya.kuclassroom.R;
 
 /**
@@ -35,11 +34,11 @@ public class SeminarTalks extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.seminar_talks,container,false);
 
-        search = (Button) view.findViewById(R.id.button);
-        editText = (EditText) view.findViewById(R.id.editText);
+        search = view.findViewById(R.id.button);
+        editText = view.findViewById(R.id.editText);
 //        final SwipeRefreshLayout swipeToRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
-        txt = (TextView) view.findViewById(R.id.txtInfo);
-        webView = (WebView) view.findViewById(R.id.webView);
+        txt = view.findViewById(R.id.txtInfo);
+        webView = view.findViewById(R.id.webView);
         webView.setWebViewClient(new SeminarTalks.MyBrowser());  //set the WebViewClient of your WebView to the custom subclass that you created in your code.
 
 

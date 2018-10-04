@@ -37,11 +37,11 @@ public class NoticeAnnouncement extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.notice_announcements,container,false);
 
-        search = (Button) view.findViewById(R.id.button);
-        editText = (EditText) view.findViewById(R.id.editText);
+        search = view.findViewById(R.id.button);
+        editText = view.findViewById(R.id.editText);
 //        final SwipeRefreshLayout swipeToRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
-        txt = (TextView) view.findViewById(R.id.txtInfo);
-        webView = (WebView) view.findViewById(R.id.webView);
+        txt = view.findViewById(R.id.txtInfo);
+        webView = view.findViewById(R.id.webView);
         webView.setWebViewClient(new NoticeAnnouncement.MyBrowser());  //set the WebViewClient of your WebView to the custom subclass that you created in your code.
 
         search.setOnClickListener(new View.OnClickListener() {

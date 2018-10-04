@@ -32,13 +32,13 @@ public class Attendance extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.attendance,container, false);
 
-        InputDesc = (TextView) view.findViewById(R.id.Input_Desc);
-        CalcDesc = (TextView) view.findViewById(R.id.calDesc);
-        Answer = (TextView) view.findViewById(R.id.Ans);
+        InputDesc = view.findViewById(R.id.Input_Desc);
+        CalcDesc = view.findViewById(R.id.calDesc);
+        Answer = view.findViewById(R.id.Ans);
 
-        Calculate = (Button) view.findViewById(R.id.calc);
+        Calculate = view.findViewById(R.id.calc);
 
-        Credit = (EditText) view.findViewById(R.id.input);
+        Credit = view.findViewById(R.id.input);
 
         Calculate.setOnClickListener(new View.OnClickListener() {
             @Override
