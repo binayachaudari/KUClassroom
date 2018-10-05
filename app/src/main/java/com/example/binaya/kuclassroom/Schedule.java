@@ -26,7 +26,6 @@ import java.util.Calendar;
  */
 
 public class Schedule extends Fragment {
-    private static final String TAG = "Schedule";
 
     // ViewPager -> Layout manager that allows the user to flip left and right through pages of data.
     private ViewPager mViewPager;
@@ -66,7 +65,12 @@ public class Schedule extends Fragment {
     public void displayToday(){
         Calendar calendar = Calendar.getInstance();
         int dayPosition = calendar.get(Calendar.DAY_OF_WEEK);
-        mViewPager.setCurrentItem(dayPosition-1);
+        if(dayPosition < 7) {
+            mViewPager.setCurrentItem(dayPosition - 1);
+        }
+        else {
+            mViewPager.setCurrentItem(0);
+        }
     }
 
 

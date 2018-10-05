@@ -106,11 +106,7 @@ public class MainActivity extends AppCompatActivity
         Intent settings = new Intent(MainActivity.this,Settings_Activity.class);
         switch (id){
             case R.id.action_settings:
-                if (isUpdated()) { //Check for the version number
-                    new GetSchedule().execute(); //Executes GetSchedule Class (AsyncTask)
-                }
-                else
-                    Toast.makeText(this, "No New Schedule", Toast.LENGTH_SHORT).show();
+                new GetSchedule().execute(); //Executes GetSchedule Class (AsyncTask)
                 break;
             case R.id.about_us:
                 startActivity(aboutus);
@@ -167,7 +163,7 @@ public class MainActivity extends AppCompatActivity
     /**
      * Async task class to get JSON by making JSONParser call
      */
-    public class GetSchedule extends AsyncTask<String,Void,String> {
+    public class GetSchedule extends AsyncTask<Boolean, Void, Boolean> {
         ProgressDialog progressDialog;
 
         JSONParser parser;
@@ -175,32 +171,37 @@ public class MainActivity extends AppCompatActivity
         GetSchedule(){
 
         }
+
+
         @Override
         protected void onPreExecute() {
-            super.onPreExecute();
-            progressDialog = new ProgressDialog(getApplicationContext());
-            progressDialog.setMessage("Updating Schedule!");
+            progressDialog = new ProgressDialog(MainActivity.this);
+            progressDialog.setMessage("Updating Schedule!!");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
 
         @Override
-        protected String doInBackground(String... params) {
-            for (int j= 0; j < URL.length; j++){
-                Data = parser.getJson(URL[j]);
-                getDataFromServer();
+        protected Boolean doInBackground(Boolean... booleans) {
+            if (isUpdated()) {
+                for (int j = 0; j < URL.length; j++) {
+                    Data = parser.getJson(URL[j]);
+                    getDataFromServer();
+                }
             }
-            return null;
+            return false;
         }
 
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+        protected void onPostExecute(Boolean s) {
             // Dismiss the progress dialog
             if (progressDialog.isShowing())
                 progressDialog.dismiss();
 
-            Toast.makeText(MainActivity.this, "New Schedule Updated!", Toast.LENGTH_SHORT).show();
+            if(s)
+                Toast.makeText(MainActivity.this, "New Schedule Updated!", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(MainActivity.this, "No New Schedule", Toast.LENGTH_SHORT).show();
         }
     }
 
