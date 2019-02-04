@@ -16,19 +16,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 import com.example.binaya.kuclassroom.JSON.JSONParser;
 import com.example.binaya.kuclassroom.JSON.JsonDatabase;
 import com.example.binaya.kuclassroom.MenuActivity.*;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity
+public class  MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
+    private static final String KATHMANDU_UNIVERSITY = "Kathmandu_University";
+
 
     JsonDatabase jsonData;
 
@@ -36,8 +41,11 @@ public class MainActivity extends AppCompatActivity
     String Data;
 
     String[] URL = {
+            "https://binayachaudari.github.io/KUScheduleFiles/IYIS.json",
             "https://binayachaudari.github.io/KUScheduleFiles/IIYIIS.json",
+            "https://binayachaudari.github.io/KUScheduleFiles/IIIYIS.json",
             "https://binayachaudari.github.io/KUScheduleFiles/IIIYIIS.json",
+            "https://binayachaudari.github.io/KUScheduleFiles/IVYIS.json",
             "https://binayachaudari.github.io/KUScheduleFiles/IVYIIS.json"
     };
 
@@ -61,6 +69,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        FirebaseMessaging.getInstance().subscribeToTopic(KATHMANDU_UNIVERSITY);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -148,6 +158,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_deflection:
                 fragment = new DeflectionCalculator();
                 break;
+
+            case R.id.staff:
+                fragment = new StaffProfile();
+                break;
         }
         if(fragment != null){
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -185,11 +199,14 @@ public class MainActivity extends AppCompatActivity
         protected Boolean doInBackground(Boolean... booleans) {
             if (isUpdated()) {
                 for (int j = 0; j < URL.length; j++) {
+                    parser = new JSONParser();
                     Data = parser.getJson(URL[j]);
                     getDataFromServer();
                 }
+                return true;
+            }else {
+                return false;
             }
-            return false;
         }
 
         @Override
@@ -245,8 +262,9 @@ public class MainActivity extends AppCompatActivity
                     e.printStackTrace();
                 }
             }
+            return version;
         }
-        return version;
+        return 1;
     }
 
     public boolean isUpdated(){
@@ -254,6 +272,7 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences pref = this.getPreferences(Context.MODE_PRIVATE);
         int ver = pref.getInt("Version_Control", 1);
         SharedPreferences.Editor editor = pref.edit();
+        Log.d(TAG, "isUpdated: "+getVersion()+" "+ver);
         if (getVersion() != ver && networkInfo != null && networkInfo.isConnected()) {
             getDataFromServer();
             editor.putInt("Version_Control", getVersion());
@@ -263,4 +282,5 @@ public class MainActivity extends AppCompatActivity
         else
             return false;
     }
+
 }

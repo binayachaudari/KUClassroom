@@ -39,6 +39,7 @@ public class DeflectionCalculator extends Fragment {
     TextView Text3;
     TextView Text4;
     TextView Text5;
+    TextView TextInfo;
 
     @Nullable
     @Override
@@ -56,6 +57,9 @@ public class DeflectionCalculator extends Fragment {
         Text3 = view.findViewById(R.id.textView5);
         Text4 = view.findViewById(R.id.textView6);
         Text5 = view.findViewById(R.id.textView7);
+        TextInfo = view.findViewById(R.id.INFO);
+
+        TextInfo.setText("NOTE: DEFLECTION SYSTEM HAS BEEN ELIMINATED FROM YEAR 2017 IN KATHMANDU UNIVERSITY");
 
         int selected_id = radio_g.getCheckedRadioButtonId();
         total_marks = view.findViewById(selected_id);
@@ -145,6 +149,7 @@ public class DeflectionCalculator extends Fragment {
                     Text3.setText("");
                     Text4.setText("");
                     Text5.setText("");
+                    TextInfo.setText(" ");
                 }
                 else {
                     Text1.setText("Minimum marks required to pass in final: " + final_pass_mark);
@@ -152,6 +157,7 @@ public class DeflectionCalculator extends Fragment {
                     Text3.setText("Minimum grade that maybe obtained without deflection: " + getGrades(Min_Grade));
                     Text4.setText("Minimum grade that maybe obtained after deflection: ");
                     Text5.setText("Minimum marks required out of " + (100 - total_mark) + " to get an A: " + (80 - obtained_mark));
+                    TextInfo.setText(" ");
                 }
 
             }

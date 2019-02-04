@@ -22,6 +22,10 @@
             android:id="@+id/nav_deflection"
             android:icon="@drawable/ic_menu_dcal"
             android:title="Deflection Calculator"/>
+        <item
+            android:id="@+id/staff"
+            android:icon="@drawable/ic_staff_profile"
+            android:title="Staff Profile" />
     </group>
 
 

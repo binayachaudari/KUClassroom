@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="20dp"
@@ -18,23 +19,34 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="38dp" />
 
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:text="Select Internal Full Marks :"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="38dp" />
+
     <RadioGroup
         android:id="@+id/Radiogroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="49dp"
         tools:layout_editor_absoluteX="272dp"
-        tools:layout_editor_absoluteY="38dp"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true">
+        tools:layout_editor_absoluteY="38dp">
 
         <RadioButton
             android:id="@+id/radioButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:checked="true"
             android:text="25"
-            android:textSize="14dp"
-            android:checked="true"/>
+            android:textSize="14dp" />
 
         <RadioButton
             android:id="@+id/radioButton2"
@@ -49,19 +61,22 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="31dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Radiogroup"
         android:layout_marginTop="24dp"
         android:text="Internal Marks Obtained"
         android:textSize="15dp"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="131dp"
-        android:layout_below="@+id/Radiogroup"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        tools:layout_editor_absoluteY="131dp" />
 
     <EditText
         android:id="@+id/internal_marks"
         android:layout_width="76dp"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/calculate_btn"
+        android:layout_toEndOf="@+id/Radiogroup"
+        android:layout_toRightOf="@+id/Radiogroup"
         android:ems="10"
         android:hint="MARKS"
         android:inputType="number"
@@ -69,100 +84,121 @@
         android:textSize="15dp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="272dp"
-        tools:layout_editor_absoluteY="131dp"
-        android:layout_above="@+id/calculate_btn"
-        android:layout_toRightOf="@+id/Radiogroup"
-        android:layout_toEndOf="@+id/Radiogroup" />
-
+        tools:layout_editor_absoluteY="131dp" />
 
 
     <Button
         android:id="@+id/calculate_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp"
         android:onClick="calcdeflection"
         android:text="Calculate"
         android:textSize="20dp"
         tools:layout_editor_absoluteX="124dp"
-        tools:layout_editor_absoluteY="186dp"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true" />
+        tools:layout_editor_absoluteY="186dp" />
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@id/calculate_btn"
-    android:layout_marginTop="20dp"
-    android:visibility="gone"
-    android:id="@+id/scroll">
-    <RelativeLayout
+    <TextView
+        android:id="@+id/INFO"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/calculate_btn"
-        android:layout_marginTop="10dp">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="252dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginStart="0dp"
+        android:textAlignment="center"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="720dp"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="15dp"
-            tools:layout_editor_absoluteX="96dp"
-            tools:layout_editor_absoluteY="255dp" />
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/calculate_btn"
+        android:layout_marginTop="20dp"
+        android:visibility="gone">
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="720dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text=""
-            android:textSize="15dp"
-            tools:layout_editor_absoluteX="96dp"
-            tools:layout_editor_absoluteY="255dp" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="720dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:text=""
-            android:textSize="15dp"
-            tools:layout_editor_absoluteX="96dp"
-            tools:layout_editor_absoluteY="255dp" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="720dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
-            android:text=""
-            android:textSize="15dp"
-            tools:layout_editor_absoluteX="96dp"
-            tools:layout_editor_absoluteY="255dp" />
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="720dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="200dp"
-            android:text=""
-            android:textSize="15dp"
-            tools:layout_editor_absoluteX="96dp"
-            tools:layout_editor_absoluteY="255dp" />
-
-        <TextView
-            android:id="@+id/textView8"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="50dp"
-            android:layout_below="@id/textView7"
-            android:text=""
-            android:textSize="15dp"
-            tools:layout_editor_absoluteX="96dp"
-            tools:layout_editor_absoluteY="255dp" />
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/calculate_btn"
+            android:layout_marginTop="10dp">
 
-    </RelativeLayout>
-</ScrollView>
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="720dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="96dp"
+                tools:layout_editor_absoluteY="255dp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="720dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text=""
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="96dp"
+                tools:layout_editor_absoluteY="255dp" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="720dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:text=""
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="96dp"
+                tools:layout_editor_absoluteY="255dp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="720dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="150dp"
+                android:text=""
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="96dp"
+                tools:layout_editor_absoluteY="255dp" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="720dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="200dp"
+                android:text=""
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="96dp"
+                tools:layout_editor_absoluteY="255dp" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/textView7"
+                android:layout_marginTop="50dp"
+                android:text=""
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="96dp"
+                tools:layout_editor_absoluteY="255dp" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/textView7"
+                android:layout_marginTop="50dp"
+                android:text=""
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="96dp"
+                tools:layout_editor_absoluteY="255dp" />
+
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>
